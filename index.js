@@ -2,11 +2,11 @@ const express = require('express');
 const app = express();
 const mongoose = require("mongoose");
 const {UserRoute} = require('./routes/index');
-const port = 3000;
+require('dotenv').config({path: './.env'});
 
 /* Moongoose connect */
 mongoose.connect(
-    `mongodb+srv://Uttam:uttam@ecommerce.kvyep7b.mongodb.net/Ecom?retryWrites=true&w=majority`,
+    `mongodb+srv://${process.env.DEV_USER}:${process.env.DEV_PASSWORD}@ecommerce.kvyep7b.mongodb.net/Ecom?retryWrites=true&w=majority`,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -23,7 +23,7 @@ app.use('/user',UserRoute);
 /* End */
 
 
-app.listen(port, () => {
-    console.log(`Server is listening on port ${port}`);
+app.listen(process.env.DEV_PORT, () => {
+    console.log(`Server is listening on port ${process.env.DEV_PORT}`);
 });
 
